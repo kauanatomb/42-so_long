@@ -31,4 +31,6 @@ typedef struct s_game {
 } t_game;
 
 
+int	parse_map(const char *filename, t_game *game);
+
 #endif
