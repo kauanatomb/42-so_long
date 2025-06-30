@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static int	is_valid_extension(char *filename)
+static int	is_valid_extension(const char *filename)
 {
 	int	len = ft_strlen(filename);
 	if (len < 5)
@@ -65,6 +65,50 @@ int	read_map_file(const char *filename, t_game *game)
 	return (1);
 }
 
+int	is_rectangular(t_game *game)
+{
+	int	expected_len;
+	int	i;
+	int	len;
+
+	expected_len = ft_strlen(game->map[0]);
+	if (game->map[0][expected_len - 1] == '\n')
+		expected_len--;
+	i = 1;
+	while (i < game->height)
+	{
+		len = ft_strlen(game->map[i]);
+		if (game->map[i][len - 1] == '\n')
+			len--;
+		if (len != expected_len)
+			return (0);
+		i++;
+	}
+	game->width = expected_len;
+	return (1);
+}
+
+int	has_only_valid_chars(t_game *game)
+{
+	int	i, j;
+	char	c;
+
+	i = 0;
+	while (i < game->height)
+	{
+		j = 0;
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			c = game->map[i][j];
+			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	parse_map(const char *filename, t_game *game)
 {
 	if (!is_valid_extension(filename))
@@ -75,11 +119,11 @@ int	parse_map(const char *filename, t_game *game)
 		return (ft_putendl_fd("Map is not rectangular", 2), 0);
 	if (!has_only_valid_chars(game))
 		return (ft_putendl_fd("Map contains invalid characters", 2), 0);
-	if (!has_required_elements(game))
-		return (ft_putendl_fd("Map must have 1P, ≥1E and ≥1C", 2), 0);
-	if (!is_surrounded_by_walls(game))
-		return (ft_putendl_fd("Map is not closed by walls", 2), 0);
-	if (!is_solvable(game))
-		return (ft_putendl_fd("Map is not solvable", 2), 0);
+	// if (!has_required_elements(game))
+	// 	return (ft_putendl_fd("Map must have 1P, ≥1E and ≥1C", 2), 0);
+	// if (!is_surrounded_by_walls(game))
+	// 	return (ft_putendl_fd("Map is not closed by walls", 2), 0);
+	// if (!is_solvable(game))
+	// 	return (ft_putendl_fd("Map is not solvable", 2), 0);
 	return (1);
 }

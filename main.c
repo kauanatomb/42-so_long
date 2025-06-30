@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         return (ft_putendl_fd("Usage: ./so_long map.ber", 2), 1);
     if (!parse_map(argv[1], &game))
     {
-        free_map(game);
+        // free_map(game);
         return (1);
     }
     // Debug
