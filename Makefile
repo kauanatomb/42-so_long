@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = so_long
-SRC = main.c parse.c parse2.c
+SRC = main.c parse.c parse1.c parse2.c so_long_utils.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

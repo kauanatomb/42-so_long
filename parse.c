@@ -6,28 +6,17 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/29 17:19:04 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:23:11 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_game(t_game *game)
-{
-	game->map = NULL;
-	game->width = 0;
-	game->height = 0;
-	game->player_x = 0;
-	game->player_y = 0;
-	game->player_count = 0;
-	game->exit_count = 0;
-	game->collectible_count = 0;
-}
-
-
 static int	is_valid_extension(const char *filename)
 {
-	int	len = ft_strlen(filename);
+	int	len;
+
+	len = ft_strlen(filename);
 	if (len < 5)
 		return (0);
 	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
@@ -36,26 +25,46 @@ static int	is_valid_extension(const char *filename)
 static int	count_lines(const char *filename)
 {
 	int		fd;
-	int		count = 0;
+	int		count;
 	char	*line;
 
+	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		count++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);
 }
 
-int	read_map_file(const char *filename, t_game *game)
+static int	read_lines_into_map(int fd, t_game *game)
 {
-	int		fd;
-	int		i = 0;
 	char	*line;
+	int		i;
+
+	i = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		game->map[i] = line;
+		if (i == 0)
+			game->width = ft_strlen(line) - (line[ft_strlen(line) - 1] == '\n');
+		line = get_next_line(fd);
+		i++;
+	}
+	game->map[i] = NULL;
+	return (1);
+}
+
+static int	read_map_file(const char *filename, t_game *game)
+{
+	int	fd;
 
 	game->height = count_lines(filename);
 	if (game->height <= 0)
@@ -66,124 +75,10 @@ int	read_map_file(const char *filename, t_game *game)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (free(game->map), 0);
-	while ((line = get_next_line(fd)))
-	{
-		game->map[i] = line;
-		if (i == 0)
-			game->width = ft_strlen(line) - (line[ft_strlen(line)-1] == '\n');
-		i++;
-	}
-	game->map[i] = NULL;
+	if (!read_lines_into_map(fd, game))
+		return (close(fd), 0);
 	close(fd);
 	return (1);
-}
-
-int	is_rectangular(t_game *game)
-{
-	int	expected_len;
-	int	i;
-	int	len;
-
-	expected_len = ft_strlen(game->map[0]);
-	if (game->map[0][expected_len - 1] == '\n')
-		expected_len--;
-	i = 1;
-	while (i < game->height)
-	{
-		len = ft_strlen(game->map[i]);
-		if (game->map[i][len - 1] == '\n')
-			len--;
-		if (len != expected_len)
-			return (0);
-		i++;
-	}
-	game->width = expected_len;
-	return (1);
-}
-
-int	has_only_valid_chars(t_game *game)
-{
-	int	i, j;
-	char	c;
-
-	i = 0;
-	while (i < game->height)
-	{
-		j = 0;
-		while (game->map[i][j] && game->map[i][j] != '\n')
-		{
-			c = game->map[i][j];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	has_required_elements(t_game *game)
-{
-	int	i, j;
-
-	i = 0;
-	while (i < game->height)
-	{
-		j = 0;
-		while (game->map[i][j] && game->map[i][j] != '\n')
-		{
-			if (game->map[i][j] == 'P')
-			{
-				game->player_count++;
-				game->player_x = j;
-				game->player_y = i;
-			}
-			else if (game->map[i][j] == 'E')
-				game->exit_count++;
-			else if (game->map[i][j] == 'C')
-				game->collectible_count++;
-			j++;
-		}
-		i++;
-	}
-	if (game->player_count != 1 || game->exit_count < 1 || game->collectible_count < 1)
-		return (0);
-	return (1);
-}
-
-int	is_surrounded_by_walls(t_game *game)
-{
-	int len;
-	int	x;
-	int	y;
-
-	len = game->width;
-	x = 0;
-	y = 0;
-	while (x < len)
-	{
-		if (game->map[0][x] != '1' || game->map[game->height - 1][x] != '1')
-			return (0);
-		x++;
-	}
-	while (y < game->height)
-	{
-		if (game->map[y][0] != '1' || game->map[y][len - 1] != '1')
-			return (0);
-		y++;
-	}
-	return (1);
-}
-
-void	free_map(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->height)
-		free(game->map[i++]);
-	free(game->map);
-	game->map = NULL;
 }
 
 int	parse_map(const char *filename, t_game *game)
