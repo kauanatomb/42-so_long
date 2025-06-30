@@ -18,12 +18,16 @@ int main(int argc, char **argv)
 
     if (argc != 2)
         return (ft_putendl_fd("Usage: ./so_long map.ber", 2), 1);
+    init_game(&game);
     if (!parse_map(argv[1], &game))
     {
-        // free_map(game);
+        if (game.map)
+            free_map(&game);
         return (1);
     }
     // Debug
     for (int i = 0; i < game.height; i++)
         ft_printf("%s", game.map[i]);
+    free_map(&game);
+    return (0);
 }

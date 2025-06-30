@@ -30,7 +30,9 @@ typedef struct s_game {
     int     player_y;
 } t_game;
 
-
+void	init_game(t_game *game);
 int	parse_map(const char *filename, t_game *game);
+int	is_solvable(t_game *game);
+void	free_map(t_game *game);
 
 #endif
