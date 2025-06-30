@@ -12,6 +12,12 @@
 
 #include "so_long.h"
 
+void    print_map(t_game game)
+{
+    for (int i = 0; i < game.height; i++)
+        ft_printf("%s", game.map[i]);
+}
+
 int main(int argc, char **argv)
 {
     t_game game;
@@ -26,8 +32,7 @@ int main(int argc, char **argv)
         return (1);
     }
     // Debug
-    for (int i = 0; i < game.height; i++)
-        ft_printf("%s", game.map[i]);
+    print_map(game);
     free_map(&game);
     return (0);
 }

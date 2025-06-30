@@ -30,37 +30,49 @@ static char	**copy_map(t_game *game)
 	return (copy);
 }
 
-static void	flood_fill(char **map, int x, int y)
+static void	flood_fill(char **map, int x, int y, int height, int width)
 {
-	if (map[y][x] == '1' || map[y][x] == 'F')
+    if (x < 0 || y < 0 || y >= height || x >= width)
+        return ;
+	if (map[y][x] == '1' || map[y][x] == 'F' || map[y][x] == 'E')
 		return ;
-	map[y][x] = 'F';
-	flood_fill(map, x + 1, y);
-	flood_fill(map, x - 1, y);
-	flood_fill(map, x, y + 1);
-	flood_fill(map, x, y - 1);
+    map[y][x] = 'F';
+	flood_fill(map, x + 1, y, height, width);
+	flood_fill(map, x - 1, y, height, width);
+	flood_fill(map, x, y + 1, height, width);
+	flood_fill(map, x, y - 1, height, width);
 }
 
-static int	check_reachability(char **map)
+static int  is_exit_reachable(char **map, int x, int y, int height, int width)
+{
+	if (map[y][x] != 'E')
+		return (0);
+	if (y > 0 && map[y - 1][x] == 'F') return (1);
+	if (y < height - 1 && map[y + 1][x] == 'F') return (1);
+	if (x > 0 && map[y][x - 1] == 'F') return (1);
+	if (x < width - 1 && map[y][x + 1] == 'F') return (1);
+	return (0);
+}
+
+static int	check_reachability(char **map, int height, int width)
 {
 	int	x;
-    int y;
-	int	found_exit;
-    
-    found_exit = 0;
-    y = 0;
-	while (map[y])
+	int y;
+	int	found_exit = 0;
+
+	y = 0;
+	while (y < height)
 	{
-        x = 0;
-		while (map[y][x])
+		x = 0;
+		while (x < width)
 		{
 			if (map[y][x] == 'C')
 				return (0);
-			if (map[y][x] == 'E')
+			if (is_exit_reachable(map, x, y, height, width))
 				found_exit = 1;
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 	return (found_exit);
 }
@@ -83,8 +95,10 @@ int	is_solvable(t_game *game)
     copy = copy_map(game);
 	if (!copy)
 		return (0);
-	flood_fill(copy, game->player_x, game->player_y);
-	result = check_reachability(copy);
+	flood_fill(copy, game->player_x, game->player_y, game->height,game->width);
+	result = check_reachability(copy, game->height, game->width);
+    for (int i = 0; i < game->height; i++)
+	    ft_printf("%s", copy[i]);
     free_copy_map(copy, game->height);
 	return (result);
 }
