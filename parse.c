@@ -12,6 +12,19 @@
 
 #include "so_long.h"
 
+void	init_game(t_game *game)
+{
+	game->map = NULL;
+	game->width = 0;
+	game->height = 0;
+	game->player_x = 0;
+	game->player_y = 0;
+	game->player_count = 0;
+	game->exit_count = 0;
+	game->collectible_count = 0;
+}
+
+
 static int	is_valid_extension(const char *filename)
 {
 	int	len = ft_strlen(filename);
@@ -109,6 +122,70 @@ int	has_only_valid_chars(t_game *game)
 	return (1);
 }
 
+int	has_required_elements(t_game *game)
+{
+	int	i, j;
+
+	i = 0;
+	while (i < game->height)
+	{
+		j = 0;
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->player_count++;
+				game->player_x = j;
+				game->player_y = i;
+			}
+			else if (game->map[i][j] == 'E')
+				game->exit_count++;
+			else if (game->map[i][j] == 'C')
+				game->collectible_count++;
+			j++;
+		}
+		i++;
+	}
+	if (game->player_count != 1 || game->exit_count < 1 || game->collectible_count < 1)
+		return (0);
+	return (1);
+}
+
+int	is_surrounded_by_walls(t_game *game)
+{
+	int len;
+	int	x;
+	int	y;
+
+	len = game->width;
+	x = 0;
+	y = 0;
+	while (x < len)
+	{
+		if (game->map[0][x] != '1' || game->map[game->height - 1][x] != '1')
+			return (0);
+		x++;
+	}
+	while (y < game->height)
+	{
+		if (game->map[y][0] != '1' || game->map[y][len - 1] != '1')
+			return (0);
+		y++;
+	}
+	return (1);
+}
+
+void	free_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->height)
+		free(game->map[i++]);
+	free(game->map);
+	game->map = NULL;
+}
+
 int	parse_map(const char *filename, t_game *game)
 {
 	if (!is_valid_extension(filename))
@@ -119,11 +196,11 @@ int	parse_map(const char *filename, t_game *game)
 		return (ft_putendl_fd("Map is not rectangular", 2), 0);
 	if (!has_only_valid_chars(game))
 		return (ft_putendl_fd("Map contains invalid characters", 2), 0);
-	// if (!has_required_elements(game))
-	// 	return (ft_putendl_fd("Map must have 1P, ≥1E and ≥1C", 2), 0);
-	// if (!is_surrounded_by_walls(game))
-	// 	return (ft_putendl_fd("Map is not closed by walls", 2), 0);
-	// if (!is_solvable(game))
-	// 	return (ft_putendl_fd("Map is not solvable", 2), 0);
+	if (!has_required_elements(game))
+		return (ft_putendl_fd("Map must have 1P, ≥1E and ≥1C", 2), 0);
+	if (!is_surrounded_by_walls(game))
+		return (ft_putendl_fd("Map is not closed by walls", 2), 0);
+	if (!is_solvable(game))
+		return (ft_putendl_fd("Map is not solvable", 2), 0);
 	return (1);
 }
