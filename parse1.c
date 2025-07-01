@@ -89,7 +89,7 @@ int	has_required_elements(t_game *game)
 		y++;
 	}
 	if (game->player_count != 1
-		|| game->exit_count < 1
+		|| game->exit_count != 1
 		|| game->collectible_count < 1)
 		return (0);
 	return (1);

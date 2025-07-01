@@ -84,18 +84,18 @@ static int	read_map_file(const char *filename, t_game *game)
 int	parse_map(const char *filename, t_game *game)
 {
 	if (!is_valid_extension(filename))
-		return (ft_putendl_fd("Invalid file extension", 2), 0);
+		return (ft_putendl_fd("Error: Invalid file extension", 2), 0);
 	if (!read_map_file(filename, game))
-		return (ft_putendl_fd("Failed to read map", 2), 0);
+		return (ft_putendl_fd("Error: Failed to read map", 2), 0);
 	if (!is_rectangular(game))
-		return (ft_putendl_fd("Map is not rectangular", 2), 0);
+		return (ft_putendl_fd("Error: Map is not rectangular", 2), 0);
 	if (!has_only_valid_chars(game))
-		return (ft_putendl_fd("Map contains invalid characters", 2), 0);
+		return (ft_putendl_fd("Error: Map contains invalid characters", 2), 0);
 	if (!has_required_elements(game))
-		return (ft_putendl_fd("Map must have 1P, ≥1E and ≥1C", 2), 0);
+		return (ft_putendl_fd("Error: Map must have 1P, 1E and ≥1C", 2), 0);
 	if (!is_surrounded_by_walls(game))
-		return (ft_putendl_fd("Map is not closed by walls", 2), 0);
+		return (ft_putendl_fd("Error: Map is not closed by walls", 2), 0);
 	if (!is_solvable(game))
-		return (ft_putendl_fd("Map is not solvable", 2), 0);
+		return (ft_putendl_fd("Error: Map is not solvable", 2), 0);
 	return (1);
 }
