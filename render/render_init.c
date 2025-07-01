@@ -12,16 +12,17 @@
 
 #include "so_long.h"
 
-int	start_game(t_game *game)
+void	init_graphics(t_graphics *gfx, int width, int height)
 {
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		return (0);
-	game->win = mlx_new_window(game->mlx,
-		game->width * TILE_SIZE,
-		game->height * TILE_SIZE,
-		"so_long");
-	if (!game->win)
-		return (0);
-	return (1);
+	gfx->mlx = mlx_init();
+	if (!gfx->mlx)
+		exit_with_error("MLX init failed");
+	gfx->win = mlx_new_window(
+		gfx->mlx,
+		width,
+		height,
+		"So Long"
+	);
+	if (!gfx->win)
+		exit_with_error("Window creation failed");
 }

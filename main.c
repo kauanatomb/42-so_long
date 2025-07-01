@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 			free_map(&game);
 		return (1);
 	}
+	init_graphics(&game.gfx, game.width * TILE_SIZE, game.height * TILE_SIZE);
 	print_map(game);
 	free_map(&game);
 	return (0);

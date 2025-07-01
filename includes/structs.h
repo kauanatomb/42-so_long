@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# define TILE_SIZE 64
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-# include "libft.h"
-# include <fcntl.h>   // open
-# include <stdlib.h>  // malloc, free
-# include <unistd.h>  // close
-# include <stdio.h>   // perror
-// # include <mlx.h>
-# include "structs.h"
+typedef struct s_img		t_img;
+typedef struct s_graphics	t_graphics;
+typedef struct s_game		t_game;
 
-int		parse_map(const char *filename, t_game *game);
-int		is_rectangular(t_game *game);
-int		has_only_valid_chars(t_game *game);
-int		has_required_elements(t_game *game);
-int		is_surrounded_by_walls(t_game *game);
-int		is_solvable(t_game *game);
-void	free_map(t_game *game);
-void	free_copy_map(char **map, int height);
-void	init_game(t_game *game);
+struct s_img
+{
+	void	*ptr;
+	int		width;
+	int		height;
+};
+
+struct s_graphics
+{
+	void		*mlx;
+	void		*win;
+	t_img		img_wall;
+	t_img		img_floor;
+	t_img		img_player;
+	t_img		img_exit;
+	t_img		img_collectible;
+};
+
+struct s_game
+{
+	char		**map;
+	int			width;
+	int			height;
+	int			player_count;
+	int			exit_count;
+	int			collectible_count;
+	int			player_x;
+	int			player_y;
+	t_graphics	gfx;
+};
 
 #endif
