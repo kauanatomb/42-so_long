@@ -12,12 +12,14 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define TILE_SIZE 64
 
 # include "libft.h"
 # include <fcntl.h>   // open
 # include <stdlib.h>  // malloc, free
 # include <unistd.h>  // close
 # include <stdio.h>   // perror
+// # include <mlx.h>
 
 typedef struct s_game
 {
@@ -29,6 +31,8 @@ typedef struct s_game
 	int		collectible_count;
 	int		player_x;
 	int		player_y;
+	void	*mlx;
+	void	*win;
 }		t_game;
 
 int		parse_map(const char *filename, t_game *game);

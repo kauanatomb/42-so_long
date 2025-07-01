@@ -10,28 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
-SRC = main.c parse.c parse1.c parse2.c so_long_utils.c
-OBJ = $(SRC:.c=.o)
+NAME    := so_long
 
-CC = cc
-CCFLAGS = -Wall -Wextra -Werror
-INCLUDES = -Iincludes -Ilibft
+# Fontes
+SRC     := main.c \
+           map/parse.c map/parse1.c map/parse2.c \
+           game/so_long_utils.c \
+           render/render_init.c
+
+OBJ     := $(SRC:.c=.o)
+
+CC      := cc
+CFLAGS  := -Wall -Wextra -Werror
+
+INCLUDES := -Iincludes -Ilibft -Imlx
+
+LIBFT   := libft/libft.a
+MLX     := mlx/libmlx.a
+MLXFLAGS := -Lmlx -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
 
-$(NAME): $(OBJ) libft/libft.a
-	$(CC) $(CCFLAGS) $(OBJ) -Llibft -lft -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJ) -Llibft -lft $(MLXFLAGS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-libft/libft.a:
+$(LIBFT):
 	make -C libft
+
+$(MLX):
+	make -C mlx
 
 clean:
 	rm -f $(OBJ)
 	make clean -C libft
+	make clean -C mlx
 
 fclean: clean
 	rm -f $(NAME)
@@ -39,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re
