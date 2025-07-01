@@ -32,6 +32,8 @@ int	is_rectangular(t_game *game)
 		i++;
 	}
 	game->width = expected_len;
+	if (game->width == game->height)
+		return (0);
 	return (1);
 }
 
