@@ -12,15 +12,6 @@
 
 #include "so_long.h"
 
-void	print_map(t_game game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game.height)
-		ft_printf("%s", game.map[i++]);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;

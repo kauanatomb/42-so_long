@@ -75,7 +75,18 @@ int exit_game(void *param)
 	
 	game = (t_game *)param;
     free_map(game);
-    mlx_destroy_window(game->gfx.mlx, game->gfx.win);
+    if (game->gfx.img_wall.ptr)
+        mlx_destroy_image(game->gfx.mlx, game->gfx.img_wall.ptr);
+    if (game->gfx.img_floor.ptr)
+        mlx_destroy_image(game->gfx.mlx, game->gfx.img_floor.ptr);
+    if (game->gfx.img_player.ptr)
+        mlx_destroy_image(game->gfx.mlx, game->gfx.img_player.ptr);
+    if (game->gfx.img_exit.ptr)
+        mlx_destroy_image(game->gfx.mlx, game->gfx.img_exit.ptr);
+    if (game->gfx.img_collectible.ptr)
+        mlx_destroy_image(game->gfx.mlx, game->gfx.img_collectible.ptr);
+    if (game->gfx.win)
+        mlx_destroy_window(game->gfx.mlx, game->gfx.win);
     exit(0);
     return (0);
 }
