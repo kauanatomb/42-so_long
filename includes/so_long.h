@@ -19,7 +19,7 @@
 # include <stdlib.h>  // malloc, free
 # include <unistd.h>  // close
 # include <stdio.h>   // perror
-// # include <mlx.h>
+# include <mlx.h>
 # include "structs.h"
 
 int		parse_map(const char *filename, t_game *game);
@@ -31,5 +31,9 @@ int		is_solvable(t_game *game);
 void	free_map(t_game *game);
 void	free_copy_map(char **map, int height);
 void	init_game(t_game *game);
+void	init_graphics(t_graphics *gfx, int width, int height);
+void	exit_with_error(char *message);
+void	load_images(t_game *game);
+void	render_map(t_game *game);
 
 #endif

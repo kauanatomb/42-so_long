@@ -94,8 +94,6 @@ int	is_solvable(t_game *game)
 		return (0);
 	flood_fill(copy, game->player_x, game->player_y, game);
 	result = check_reachability(copy, game);
-	while (i < game->height)
-		ft_printf("%s", copy[i++]);
 	free_copy_map(copy, game->height);
 	return (result);
 }

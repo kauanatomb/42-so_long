@@ -35,7 +35,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_graphics(&game.gfx, game.width * TILE_SIZE, game.height * TILE_SIZE);
-	print_map(game);
+	load_images(&game);
+	render_map(&game);
+	mlx_loop(game.gfx.mlx);
+	mlx_key_hook(game.gfx.win, handle_keypress, &game);
+	mlx_loop(game.gfx.mlx);
+	// print_map(game);
 	free_map(&game);
 	return (0);
 }
