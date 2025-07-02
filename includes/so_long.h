@@ -44,5 +44,6 @@ void	render_map(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 int		exit_game(void *param);
 void	render_info(t_game *game);
+void	init_enemies(t_game *game);
 
 #endif
