@@ -43,7 +43,7 @@ static void	process_movement(t_game *game, int new_x, int new_y)
 	if (game->map[new_y][new_x] == 'E' && game->collectible_count == 0)
 	{
 		game->moves_count++;
-		ft_printf("Moves: %d\n", game->moves_count);
+		ft_printf("You won in %d moves!\n", game->moves_count);
 		exit_game(game);
 	}
 	if (game->map[new_y][new_x] == 'M')
