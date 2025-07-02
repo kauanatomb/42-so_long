@@ -24,6 +24,9 @@ void	init_game(t_game *game)
 	game->enemy_count = 0;
 	game->collectible_count = 0;
 	game->moves_count = 0;
+	game->exit_x = 0;
+	game->exit_y = 0;
+	game->enemies = NULL;
 }
 
 void	free_copy_map(char **map, int height)
