@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/07/02 09:39:29 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:53:50 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,27 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
+	render_info(game);
 }
 
-int exit_game(void *param)
+int	exit_game(void *param)
 {
-    t_game *game;
-	
+	t_game	*game;
+
 	game = (t_game *)param;
-    free_map(game);
-    if (game->gfx.img_wall.ptr)
-        mlx_destroy_image(game->gfx.mlx, game->gfx.img_wall.ptr);
-    if (game->gfx.img_floor.ptr)
-        mlx_destroy_image(game->gfx.mlx, game->gfx.img_floor.ptr);
-    if (game->gfx.img_player.ptr)
-        mlx_destroy_image(game->gfx.mlx, game->gfx.img_player.ptr);
-    if (game->gfx.img_exit.ptr)
-        mlx_destroy_image(game->gfx.mlx, game->gfx.img_exit.ptr);
-    if (game->gfx.img_collectible.ptr)
-        mlx_destroy_image(game->gfx.mlx, game->gfx.img_collectible.ptr);
-    if (game->gfx.win)
-        mlx_destroy_window(game->gfx.mlx, game->gfx.win);
-    exit(0);
-    return (0);
+	free_map(game);
+	if (game->gfx.img_wall.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_wall.ptr);
+	if (game->gfx.img_floor.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_floor.ptr);
+	if (game->gfx.img_player.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_player.ptr);
+	if (game->gfx.img_exit.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_exit.ptr);
+	if (game->gfx.img_collectible.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_collectible.ptr);
+	if (game->gfx.win)
+		mlx_destroy_window(game->gfx.mlx, game->gfx.win);
+	exit(0);
+	return (0);
 }

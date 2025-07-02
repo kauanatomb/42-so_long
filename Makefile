@@ -16,7 +16,7 @@ NAME    := so_long
 SRC     := main.c \
            map/parse.c map/parse1.c map/parse2.c \
            game/so_long_utils.c \
-           render/render_init.c render/render_img.c
+           render/render_init.c render/render_img.c render/render_messages.c
 
 OBJ     := $(SRC:.c=.o)
 

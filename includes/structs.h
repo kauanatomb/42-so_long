@@ -45,6 +45,9 @@ struct s_game
 	int			collectible_count;
 	int			player_x;
 	int			player_y;
+	int			exit_x;
+	int			exit_y;
+	int			moves_count;
 	t_graphics	gfx;
 };
 

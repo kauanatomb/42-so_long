@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/30 16:50:28 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:56:27 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_game(t_game *game)
 	game->player_count = 0;
 	game->exit_count = 0;
 	game->collectible_count = 0;
+	game->moves_count = 0;
 }
 
 void	free_copy_map(char **map, int height)
@@ -43,4 +44,27 @@ void	free_map(t_game *game)
 		free(game->map[i++]);
 	free(game->map);
 	game->map = NULL;
+}
+
+void	init_exit_position(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'E')
+			{
+				game->exit_x = x;
+				game->exit_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
