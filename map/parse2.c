@@ -34,7 +34,8 @@ static void	flood_fill(char **map, int x, int y, t_game *game)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= game->width)
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'F' || map[y][x] == 'E')
+	if (map[y][x] == '1' || map[y][x] == 'F' || map[y][x] == 'E'
+		|| map[y][x] == 'M')
 		return ;
 	map[y][x] = 'F';
 	flood_fill(map, x + 1, y, game);

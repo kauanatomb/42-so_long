@@ -50,7 +50,8 @@ int	has_only_valid_chars(t_game *game)
 		while (game->map[i][j] && game->map[i][j] != '\n')
 		{
 			c = game->map[i][j];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
+			if (c != '0' && c != '1' && c != 'C' && c != 'E'
+				&& c != 'P' && c != 'M')
 				return (0);
 			j++;
 		}
@@ -76,6 +77,8 @@ static void	process_map_line(t_game *game, char *line, int y)
 			game->exit_count++;
 		else if (line[x] == 'C')
 			game->collectible_count++;
+		else if (line[x] == 'M')
+			game->enemy_count++;
 		x++;
 	}
 }

@@ -16,6 +16,12 @@
 typedef struct s_img		t_img;
 typedef struct s_graphics	t_graphics;
 typedef struct s_game		t_game;
+typedef struct s_enemy		t_enemy;
+
+struct s_enemy {
+	int x;
+	int y;
+};
 
 struct s_img
 {
@@ -33,8 +39,7 @@ struct s_graphics
 	t_img		img_player;
 	t_img		img_exit;
 	t_img		img_collectible;
-	t_img		img_enemy1;
-	t_img		img_enemy2;
+	t_img		img_enemy;
 };
 
 struct s_game
@@ -50,8 +55,8 @@ struct s_game
 	int			exit_x;
 	int			exit_y;
 	int			moves_count;
-	int			enemy_frame;
-	int			frame_counter;
+	t_enemy		*enemies;
+	int			enemy_count;
 	t_graphics	gfx;
 };
 

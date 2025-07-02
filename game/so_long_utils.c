@@ -21,6 +21,7 @@ void	init_game(t_game *game)
 	game->player_y = 0;
 	game->player_count = 0;
 	game->exit_count = 0;
+	game->enemy_count = 0;
 	game->collectible_count = 0;
 	game->moves_count = 0;
 }
@@ -68,3 +69,32 @@ void	init_exit_position(t_game *game)
 		y++;
 	}
 }
+
+void	init_enemies(t_game *game)
+{
+	int	y;
+	int	x;
+	int i;
+
+	game->enemies = malloc(sizeof(t_enemy) * game->enemy_count);
+	if (!game->enemies)
+		exit_with_error("Memory allocation failed for enemies");
+	i = 0;
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] == 'M')
+			{
+				game->enemies[i].x = x;
+				game->enemies[i].y = y;
+				i++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+

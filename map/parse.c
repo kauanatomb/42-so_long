@@ -97,5 +97,6 @@ int	parse_map(const char *filename, t_game *game)
 		return (ft_putendl_fd("Error: Map is not closed by walls", 2), 0);
 	if (!is_solvable(game))
 		return (ft_putendl_fd("Error: Map is not solvable", 2), 0);
+	init_enemies(game);
 	return (1);
 }
