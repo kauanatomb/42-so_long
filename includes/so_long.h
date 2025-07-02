@@ -13,6 +13,11 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define TILE_SIZE 64
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_ESC 65307
 
 # include "libft.h"
 # include <fcntl.h>   // open
@@ -35,5 +40,7 @@ void	init_graphics(t_graphics *gfx, int width, int height);
 void	exit_with_error(char *message);
 void	load_images(t_game *game);
 void	render_map(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		exit_game(void *param);
 
 #endif

@@ -68,3 +68,14 @@ void	render_map(t_game *game)
 		y++;
 	}
 }
+
+int exit_game(void *param)
+{
+    t_game *game;
+	
+	game = (t_game *)param;
+    free_map(game);
+    mlx_destroy_window(game->gfx.mlx, game->gfx.win);
+    exit(0);
+    return (0);
+}

@@ -37,10 +37,8 @@ int	main(int argc, char **argv)
 	init_graphics(&game.gfx, game.width * TILE_SIZE, game.height * TILE_SIZE);
 	load_images(&game);
 	render_map(&game);
+	mlx_hook(game.gfx.win, 2, 1L<<0, handle_keypress, &game);
+	mlx_hook(game.gfx.win, 17, 0, exit_game, &game);
 	mlx_loop(game.gfx.mlx);
-	mlx_key_hook(game.gfx.win, handle_keypress, &game);
-	mlx_loop(game.gfx.mlx);
-	// print_map(game);
-	free_map(&game);
 	return (0);
 }
