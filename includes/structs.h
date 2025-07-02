@@ -33,6 +33,8 @@ struct s_graphics
 	t_img		img_player;
 	t_img		img_exit;
 	t_img		img_collectible;
+	t_img		img_enemy1;
+	t_img		img_enemy2;
 };
 
 struct s_game
@@ -48,6 +50,8 @@ struct s_game
 	int			exit_x;
 	int			exit_y;
 	int			moves_count;
+	int			enemy_frame;
+	int			frame_counter;
 	t_graphics	gfx;
 };
 

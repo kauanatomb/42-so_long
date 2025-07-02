@@ -31,6 +31,9 @@ void	load_images(t_game *game)
 	load_image(game->gfx.mlx, &game->gfx.img_exit, "assets/64x64-exit.xpm");
 	load_image(game->gfx.mlx, &game->gfx.img_collectible,
 		"assets/64x64-collectible.xpm");
+	load_image(game->gfx.mlx, &game->gfx.img_enemy1, "assets/64x64-fire(1).xpm");
+	load_image(game->gfx.mlx, &game->gfx.img_enemy2, "assets/64x64-fire(2).xpm");
+
 }
 
 static void	process_movement(t_game *game, int new_x, int new_y)
