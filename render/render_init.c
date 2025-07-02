@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/07/02 12:53:50 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:09:10 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	render_tile(t_game *game, char tile, int x, int y)
 			gfx->img_collectible.ptr, x, y);
 	else if (tile == 'M')
 		mlx_put_image_to_window(gfx->mlx, gfx->win, gfx->img_enemy.ptr, x, y);
-
 }
 
 void	render_map(t_game *game)

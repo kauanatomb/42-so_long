@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/30 16:37:38 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:08:27 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ typedef struct s_game		t_game;
 typedef struct s_enemy		t_enemy;
 
 struct s_enemy {
-	int x;
-	int y;
+	int	x;
+	int	y;
 };
 
 struct s_img

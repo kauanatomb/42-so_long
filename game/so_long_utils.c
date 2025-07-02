@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/07/02 12:56:27 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:07:46 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	init_enemies(t_game *game)
 {
 	int	y;
 	int	x;
-	int i;
+	int	i;
 
 	game->enemies = malloc(sizeof(t_enemy) * game->enemy_count);
 	if (!game->enemies)
@@ -97,4 +97,3 @@ void	init_enemies(t_game *game)
 		y++;
 	}
 }
-
