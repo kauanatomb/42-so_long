@@ -30,10 +30,8 @@ void	load_images(t_game *game)
 	load_image(game->gfx.mlx, &game->gfx.img_player, "assets/64x64-player.xpm");
 	load_image(game->gfx.mlx, &game->gfx.img_exit, "assets/64x64-exit.xpm");
 	load_image(game->gfx.mlx, &game->gfx.img_collectible,
-		"assets/64x64-collectible.xpm");
-	load_image(game->gfx.mlx, &game->gfx.img_enemy1, "assets/64x64-fire(1).xpm");
-	load_image(game->gfx.mlx, &game->gfx.img_enemy2, "assets/64x64-fire(2).xpm");
-
+		"assets/64x64-coin.xpm");
+	load_image(game->gfx.mlx, &game->gfx.img_enemy, "assets/64x64-fire(2).xpm");
 }
 
 static void	process_movement(t_game *game, int new_x, int new_y)
@@ -46,6 +44,11 @@ static void	process_movement(t_game *game, int new_x, int new_y)
 	{
 		game->moves_count++;
 		ft_printf("Moves: %d\n", game->moves_count);
+		exit_game(game);
+	}
+	if (game->map[new_y][new_x] == 'M')
+	{
+		ft_putendl_fd("Game Over: You touched an enemy!", 1);
 		exit_game(game);
 	}
 	if (game->player_x == game->exit_x && game->player_y == game->exit_y)

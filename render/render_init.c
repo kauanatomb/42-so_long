@@ -49,6 +49,9 @@ void	render_tile(t_game *game, char tile, int x, int y)
 	else if (tile == 'C')
 		mlx_put_image_to_window(gfx->mlx, gfx->win,
 			gfx->img_collectible.ptr, x, y);
+	else if (tile == 'M')
+		mlx_put_image_to_window(gfx->mlx, gfx->win, gfx->img_enemy.ptr, x, y);
+
 }
 
 void	render_map(t_game *game)
@@ -88,6 +91,8 @@ int	exit_game(void *param)
 		mlx_destroy_image(game->gfx.mlx, game->gfx.img_collectible.ptr);
 	if (game->gfx.win)
 		mlx_destroy_window(game->gfx.mlx, game->gfx.win);
+	if (game->gfx.img_enemy.ptr)
+		mlx_destroy_image(game->gfx.mlx, game->gfx.img_enemy.ptr);
 	exit(0);
 	return (0);
 }
