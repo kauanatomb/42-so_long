@@ -20,8 +20,8 @@ void	render_info(t_game *game)
 	move_str = ft_itoa(game->moves_count);
 	if (!move_str)
 		return ;
-	mlx_string_put(game->gfx.mlx, game->gfx.win, 10, 10, 0xFFFFFF, "Moves:");
-	mlx_string_put(game->gfx.mlx, game->gfx.win, 70, 10, 0xFFFFFF, move_str);
+	mlx_string_put(game->gfx.mlx, game->gfx.win, 20, 10, 0x0000FF, "Moves:");
+	mlx_string_put(game->gfx.mlx, game->gfx.win, 60, 10, 0x0000FF, move_str);
 	free(move_str);
 	if (game->player_x == game->exit_x && game->player_y == game->exit_y
 		&& game->collectible_count > 0)
