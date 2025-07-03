@@ -58,6 +58,13 @@ static int	read_lines_into_map(int fd, t_game *game)
 		line = get_next_line(fd);
 		i++;
 	}
+	if (i < game->height)
+	{
+		while (i--)
+			free(game->map[i]);
+		free(game->map);
+		return (0);
+	}
 	game->map[i] = NULL;
 	return (1);
 }
@@ -97,6 +104,7 @@ int	parse_map(const char *filename, t_game *game)
 		return (ft_putendl_fd("Error: Map is not closed by walls", 2), 0);
 	if (!is_solvable(game))
 		return (ft_putendl_fd("Error: Map is not solvable", 2), 0);
-	init_enemies(game);
+	if (game->enemy_count > 0)
+		init_enemies(game);
 	return (1);
 }

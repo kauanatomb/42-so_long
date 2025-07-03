@@ -39,15 +39,29 @@ void	free_copy_map(char **map, int height)
 	free(map);
 }
 
-void	free_map(t_game *game)
+void	free_game(t_game *game)
 {
 	int	i;
 
+	if (!game)
+		return ;
 	i = 0;
-	while (i < game->height)
-		free(game->map[i++]);
-	free(game->map);
-	game->map = NULL;
+	if (game->map)
+	{
+		while (i < game->height)
+		{
+			if (game->map[i])
+				free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+		game->map = NULL;
+	}
+	if (game->enemies)
+	{
+		free(game->enemies);
+		game->enemies = NULL;
+	}
 }
 
 void	init_exit_position(t_game *game)

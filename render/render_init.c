@@ -77,7 +77,7 @@ int	exit_game(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	free_map(game);
+	free_game(game);
 	if (game->gfx.img_wall.ptr)
 		mlx_destroy_image(game->gfx.mlx, game->gfx.img_wall.ptr);
 	if (game->gfx.img_floor.ptr)
@@ -92,6 +92,8 @@ int	exit_game(void *param)
 		mlx_destroy_window(game->gfx.mlx, game->gfx.win);
 	if (game->gfx.img_enemy.ptr)
 		mlx_destroy_image(game->gfx.mlx, game->gfx.img_enemy.ptr);
+	if (game->gfx.mlx)
+		mlx_destroy_display(game->gfx.mlx);
 	exit(0);
 	return (0);
 }

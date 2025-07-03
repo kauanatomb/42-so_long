@@ -33,7 +33,7 @@ int		has_only_valid_chars(t_game *game);
 int		has_required_elements(t_game *game);
 int		is_surrounded_by_walls(t_game *game);
 int		is_solvable(t_game *game);
-void	free_map(t_game *game);
+void	free_game(t_game *game);
 void	free_copy_map(char **map, int height);
 void	init_game(t_game *game);
 void	init_exit_position(t_game *game);

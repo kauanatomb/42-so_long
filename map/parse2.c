@@ -24,6 +24,13 @@ static char	**copy_map(t_game *game)
 	while (i < game->height)
 	{
 		copy[i] = ft_strdup(game->map[i]);
+		if (!copy[i])
+		{
+			while (i--)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
 		i++;
 	}
 	copy[i] = NULL;

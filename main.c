@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	if (!parse_map(argv[1], &game))
 	{
 		if (game.map)
-			free_map(&game);
+			free_game(&game);
 		return (1);
 	}
 	init_exit_position(&game);
