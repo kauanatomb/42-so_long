@@ -68,8 +68,8 @@ int	handle_keypress(int keycode, t_game *game)
 	int	new_x;
 	int	new_y;
 
-	new_y = game->player_y;
 	new_x = game->player_x;
+	new_y = game->player_y;
 	if (keycode == KEY_UP)
 		new_y--;
 	else if (keycode == KEY_DOWN)
@@ -80,6 +80,9 @@ int	handle_keypress(int keycode, t_game *game)
 		new_x++;
 	else if (keycode == KEY_ESC)
 		exit_game(game);
-	process_movement(game, new_x, new_y);
+	else
+		return (0);
+	if (new_x != game->player_x || new_y != game->player_y)
+		process_movement(game, new_x, new_y);
 	return (0);
 }

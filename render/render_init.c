@@ -94,6 +94,7 @@ int	exit_game(void *param)
 		mlx_destroy_image(game->gfx.mlx, game->gfx.img_enemy.ptr);
 	if (game->gfx.mlx)
 		mlx_destroy_display(game->gfx.mlx);
+	free(game->gfx.mlx);
 	exit(0);
 	return (0);
 }
