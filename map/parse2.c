@@ -94,9 +94,7 @@ int	is_solvable(t_game *game)
 {
 	char	**copy;
 	int		result;
-	int		i;
 
-	i = 0;
 	copy = copy_map(game);
 	if (!copy)
 		return (0);
