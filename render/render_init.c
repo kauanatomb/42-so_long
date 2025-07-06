@@ -14,11 +14,16 @@
 
 void	init_graphics(t_game *game, int width, int height)
 {
+	int	screen_width;
+	int	screen_height;
+
 	game->gfx.mlx = mlx_init();
 	if (!game->gfx.mlx)
 		exit_error("MLX init failed", game);
-	game->gfx.win = mlx_new_window(
-			game->gfx.mlx, width, height, "So Long");
+	mlx_get_screen_size(game->gfx.mlx, &screen_width, &screen_height);
+	if (width > screen_width || height > screen_height)
+		exit_error("Map too big for screen", game);
+	game->gfx.win = mlx_new_window(game->gfx.mlx, width, height, "So Long");
 	if (!game->gfx.win)
 		exit_error("Window creation failed", game);
 }
