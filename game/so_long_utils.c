@@ -95,7 +95,7 @@ void	init_enemies(t_game *game)
 
 	game->enemies = malloc(sizeof(t_enemy) * game->enemy_count);
 	if (!game->enemies)
-		exit_with_error("Memory allocation failed for enemies");
+		exit_error("Memory allocation failed for enemies", game);
 	i = 0;
 	y = 0;
 	while (y < game->height)

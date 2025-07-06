@@ -20,13 +20,9 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd("Usage: ./so_long map.ber", 2), 1);
 	init_game(&game);
 	if (!parse_map(argv[1], &game))
-	{
-		if (game.map)
-			free_game(&game);
-		return (1);
-	}
+		return (free_game(&game), 1);
 	init_exit_position(&game);
-	init_graphics(&game.gfx, game.width * TILE_SIZE, game.height * TILE_SIZE);
+	init_graphics(game, game.width * TILE_SIZE, game.height * TILE_SIZE);
 	load_images(&game);
 	render_map(&game);
 	mlx_hook(game.gfx.win, 2, 1L << 0, handle_keypress, &game);

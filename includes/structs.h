@@ -18,7 +18,8 @@ typedef struct s_graphics	t_graphics;
 typedef struct s_game		t_game;
 typedef struct s_enemy		t_enemy;
 
-struct s_enemy {
+struct s_enemy
+{
 	int	x;
 	int	y;
 };

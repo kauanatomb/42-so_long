@@ -12,24 +12,26 @@
 
 #include "so_long.h"
 
-void	init_graphics(t_graphics *gfx, int width, int height)
+void	init_graphics(t_game *game, int width, int height)
 {
-	gfx->mlx = mlx_init();
-	if (!gfx->mlx)
-		exit_with_error("MLX init failed");
-	gfx->win = mlx_new_window(
-			gfx->mlx,
-			width,
-			height,
-			"So Long"
-			);
-	if (!gfx->win)
-		exit_with_error("Window creation failed");
+	game->gfx.mlx = mlx_init();
+	if (!game->gfx.mlx)
+		exit_error("MLX init failed", game);
+	game->gfx.win = mlx_new_window(
+			game->gfx.mlx, width, height, "So Long");
+	if (!game->gfx.win)
+		exit_error("Window creation failed", game);
 }
 
-void	exit_with_error(char *message)
+void	exit_error(char *msg, t_game *game)
 {
-	ft_putendl_fd(message, 2);
+	if (msg)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putendl_fd(msg, 2);
+	}
+	if (game)
+		exit_game(game);
 	exit(EXIT_FAILURE);
 }
 
