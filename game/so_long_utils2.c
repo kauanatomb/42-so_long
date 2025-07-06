@@ -6,13 +6,13 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/07/02 18:07:46 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:09:57 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		error_msg(char *msg)
+int	error_msg(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putendl_fd(msg, 2);
