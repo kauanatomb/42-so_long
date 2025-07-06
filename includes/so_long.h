@@ -28,6 +28,7 @@
 # include "structs.h"
 
 int		parse_map(const char *filename, t_game *game);
+int		error_msg(char *msg);
 int		is_rectangular(t_game *game);
 int		has_only_valid_chars(t_game *game);
 int		has_required_elements(t_game *game);

@@ -91,19 +91,19 @@ static int	read_map_file(const char *filename, t_game *game)
 int	parse_map(const char *filename, t_game *game)
 {
 	if (!is_valid_extension(filename))
-		return (ft_putendl_fd("Error: Invalid file extension", 2), 0);
+		return (error_msg("Invalid file extension"));
 	if (!read_map_file(filename, game))
-		return (ft_putendl_fd("Error: Failed to read map", 2), 0);
+		return (error_msg("Failed to read map"));
 	if (!is_rectangular(game))
-		return (ft_putendl_fd("Error: Map is not rectangular", 2), 0);
+		return (error_msg("Map is not rectangular"));
 	if (!has_only_valid_chars(game))
-		return (ft_putendl_fd("Error: Map contains invalid characters", 2), 0);
+		return (error_msg("Map contains invalid characters"));
 	if (!has_required_elements(game))
-		return (ft_putendl_fd("Error: Map must have 1P, 1E and ≥1C", 2), 0);
+		return (error_msg("Map must have 1P, 1E and ≥1C"));
 	if (!is_surrounded_by_walls(game))
-		return (ft_putendl_fd("Error: Map is not closed by walls", 2), 0);
+		return (error_msg("Map is not closed by walls"));
 	if (!is_solvable(game))
-		return (ft_putendl_fd("Error: Map is not solvable", 2), 0);
+		return (error_msg("Map is not solvable"));
 	if (game->enemy_count > 0)
 		init_enemies(game);
 	return (1);
