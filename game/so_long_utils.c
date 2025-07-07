@@ -27,6 +27,14 @@ void	init_game(t_game *game)
 	game->exit_x = 0;
 	game->exit_y = 0;
 	game->enemies = NULL;
+	game->gfx.mlx = NULL;
+	game->gfx.win = NULL;
+	game->gfx.img_wall.ptr = NULL;
+	game->gfx.img_floor.ptr = NULL;
+	game->gfx.img_player.ptr = NULL;
+	game->gfx.img_exit.ptr = NULL;
+	game->gfx.img_collectible.ptr = NULL;
+	game->gfx.img_enemy.ptr = NULL;
 }
 
 void	free_copy_map(char **map, int height)
